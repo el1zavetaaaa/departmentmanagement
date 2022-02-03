@@ -21,7 +21,7 @@ UI is generated using JSP pages.
 
 ![Product Name Screen Shot][product-departmentsUI]
 
-.[product-departmentsUI]: images/departmentsUI.png
-.[product-updateDepartments]: images/updateDepartments.png
-.[product-addEmployees]: images/addEmployees.png
-.[product-employeesUI]: images/employeesUI.png
+[product-departmentsUI]: images/departmentsUI.png
+[product-updateDepartments]: images/updateDepartments.png
+[product-addEmployees]: images/addEmployees.png
+[product-employeesUI]: images/employeesUI.png
