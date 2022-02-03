@@ -5,21 +5,21 @@ This is a department management system.
 
 - create/update/delete departments;
 
-!.[Product Name Screen Shot].[product-updateDepartments]
+!.[Product Name Screen Shot][product-updateDepartments]
 
 - create/update/delete employees;
 
-!.[Product Name Screen Shot].[product-addEmployees]
+!.[Product Name Screen Shot][product-addEmployees]
 
 - add employees to departments;
 
-!.[Product Name Screen Shot].[product-employeesUI]
+!.[Product Name Screen Shot][product-employeesUI]
 
 # CRUD UI:
 
 UI is generated using JSP pages.
 
-!.[Product Name Screen Shot].[product-departmentsUI]
+!.[Product Name Screen Shot][product-departmentsUI]
 
 .[product-departmentsUI]: images/departmentsUI.png
 .[product-updateDepartments]: images/updateDepartments.png
