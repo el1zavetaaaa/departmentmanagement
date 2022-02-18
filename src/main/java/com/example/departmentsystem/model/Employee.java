@@ -1,6 +1,7 @@
 package com.example.departmentsystem.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Employee {
 
@@ -72,5 +73,22 @@ public class Employee {
 
     public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(department_id, employee.department_id) &&
+                Objects.equals(salary, employee.salary) &&
+                Objects.equals(hireDate, employee.hireDate) &&
+                Objects.equals(email, employee.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, department_id, salary, hireDate, email);
     }
 }

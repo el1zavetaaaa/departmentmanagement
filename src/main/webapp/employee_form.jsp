@@ -67,7 +67,7 @@
                                    name="department_id" ></p>
                         <label>Salary</label>
                         <p>
-                            <input type="text" pattern="[0-9]{3,4}$" placeholder="salary 100 - 1000 $"
+                            <input type="text" pattern="[0-9]{3,4}$" placeholder="salary 100 - 10 000 $"
                                    value="<c:out value='${employee.salary}' />" class="form-control"
                                    name="salary" required pattern="required"></p>
                         <label>Hire Date</label>

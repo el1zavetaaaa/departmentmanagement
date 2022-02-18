@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.sql.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Properties;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Set;
 
 
 public class DepartmentDao {
@@ -29,9 +29,9 @@ public class DepartmentDao {
     private static final String DELETE_DEPARTMENTS = "delete from departments where id = ?;";
     private static final String UPDATE_DEPARTMENTS = "update departments set name = ? where id = ?;";
 
-    public List<Department> selectAllDepartments() {
+    public Set<Department> selectAllDepartments() {
 
-        List<Department> departments = new CopyOnWriteArrayList<>();
+        Set<Department> departments = new HashSet<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_DEPARTMENTS);) {
 
@@ -51,11 +51,10 @@ public class DepartmentDao {
         return departments;
     }
 
-    public void insertDepartment(Department department) throws SQLException {
-        System.out.println(INSERT_DEPARTMENTS);
-
+    public void insertDepartment(Department department) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DEPARTMENTS);) {
+
             preparedStatement.setString(1, department.getName());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
@@ -130,10 +129,8 @@ public class DepartmentDao {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, properties);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return connection;

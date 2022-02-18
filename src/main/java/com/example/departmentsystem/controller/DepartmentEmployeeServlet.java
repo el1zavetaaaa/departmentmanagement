@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Set;
+
 
 @WebServlet("/")
 public class DepartmentEmployeeServlet extends HttpServlet {
@@ -24,16 +24,10 @@ public class DepartmentEmployeeServlet extends HttpServlet {
 
     private EmployeeDao employeeDao;
 
-    private AtomicInteger employee_id;
-
-    private AtomicInteger id;
-
     @Override
-    public void init() throws ServletException {
+    public void init() {
         departmentDao = new DepartmentDao();
         employeeDao = new EmployeeDao();
-        employee_id = new AtomicInteger(2);
-        id = new AtomicInteger(2);
     }
 
     @Override
@@ -93,7 +87,7 @@ public class DepartmentEmployeeServlet extends HttpServlet {
     }
 
     private void listDepartment(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException {
-        List<Department> listDepartment = departmentDao.selectAllDepartments();
+        Set<Department> listDepartment = departmentDao.selectAllDepartments();
         req.setAttribute("listDepartment", listDepartment);
         req.getRequestDispatcher("/departments.jsp").forward(req, resp);
     }
@@ -107,8 +101,6 @@ public class DepartmentEmployeeServlet extends HttpServlet {
             throws IOException, SQLException {
         String name = req.getParameter("name");
         Department newDepartment = new Department();
-        final int id = this.id.getAndIncrement();
-        newDepartment.setId(id);
         newDepartment.setName(name);
         departmentDao.insertDepartment(newDepartment);
         resp.sendRedirect(req.getContextPath() + "/");
@@ -143,7 +135,7 @@ public class DepartmentEmployeeServlet extends HttpServlet {
     private void selectEmployeesByDepartmentId(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, SQLException, ServletException {
         int id = Integer.parseInt(req.getParameter("id"));
-        List<Employee> allConnectedEmployees = employeeDao.selectEmployeesByDepartmentId(id);
+        Set<Employee> allConnectedEmployees = employeeDao.selectEmployeesByDepartmentId(id);
         req.setAttribute("allConnectedEmployees", allConnectedEmployees);
         req.getRequestDispatcher("/employees.jsp").forward(req, resp);
         System.out.println(allConnectedEmployees);

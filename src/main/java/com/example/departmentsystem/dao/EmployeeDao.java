@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 public class EmployeeDao {
 
@@ -32,8 +32,8 @@ public class EmployeeDao {
     public EmployeeDao() {
     }
 
-    public List<Employee> selectEmployeesByDepartmentId(int department_id) {
-        List<Employee> employees = new ArrayList<>();
+    public Set<Employee> selectEmployeesByDepartmentId(int department_id) {
+        Set<Employee> employees = new HashSet<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEES_BY_DEPARTMENT_ID)) {
             preparedStatement.setInt(1, department_id);
@@ -58,11 +58,10 @@ public class EmployeeDao {
         return employees;
     }
 
-    public void insertEmployee(Employee employee) throws SQLException {
-        System.out.println();
-
+    public void insertEmployee(Employee employee) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEES)) {
+
             preparedStatement.setString(1, employee.getEmail());
             preparedStatement.setInt(2, employee.getDepartment_id());
             preparedStatement.setInt(3, employee.getSalary());
@@ -146,10 +145,8 @@ public class EmployeeDao {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, properties);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return connection;
